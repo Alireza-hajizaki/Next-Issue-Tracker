@@ -1,9 +1,18 @@
+//Import the global CSS file at the root of your application
+import "@radix-ui/themes/styles.css";
+//use next font instead radix font
+import "./theme-config.css";
 import "./globals.css";
 import type { Metadata } from "next";
+//wrapping the root component inside of body
+import { Theme, ThemePanel } from "@radix-ui/themes";
 import { Inter } from "next/font/google";
 import NavBar from "./NavBar";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,10 +26,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <NavBar/>
-        <main>{children}</main>
+      <body className={inter.variable}>
+        <Theme appearance="light" accentColor="violet">
+          <NavBar />
+          <main className="p-5">{children}</main>
+        </Theme>
       </body>
     </html>
   );
-};
+}
